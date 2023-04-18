@@ -1,6 +1,19 @@
 <?php
+  if(empty($_POST['from']) && empty($_POST['up'])){
   $push = 'SELECT * FROM `cat_room` ORDER BY `cat_room`.`square_room` ASC';
   $input = mysqli_query($cat_db, $push);
+  echo $_POST['from'];
+  echo $_POST['up'];
+  }else{
+    if(!$_POST['from']){
+      $_POST['from'] = 0;
+    }
+    if(!$_POST['up']){
+      $_POST['up'] = 999999;
+    }
+    $push = 'SELECT * FROM `cat_room`  WHERE price_room >= "'.$_POST['from'].'" AND price_room <= "'.$_POST['up'].'" ORDER BY `cat_room`.`square_room` ASC';
+    $input = mysqli_query($cat_db, $push);
+  }
 ?>
 
 
@@ -61,17 +74,28 @@
         <div class="filter__overlay">
           <div class="filter__inner">
             <!-- <div class="filter"> -->
-  <form action="#" method="POST" autocomplete="on">
+  <form action="#" method="POST" >
     <fieldset>
+    <?php
+      $push = 'SELECT price_room FROM `cat_room` ORDER BY `cat_room`.`price_room` ASC limit 1';
+      $min_price = mysqli_query($cat_db, $push);
+      $res = mysqli_fetch_array($min_price);
+    ?>
       <h3>Цена за сутки,<span>&#8381;</span></h3>
       <label for="from">
-        <input type="text" id="from" placeholder="100">
+        <input type="text" id="from" placeholder="<?php echo $res['price_room']; ?>" value="<?php echo $_POST['from']; ?>">
         От
       </label>
+      <?php
+      $push = 'SELECT price_room FROM `cat_room` ORDER BY `cat_room`.`price_room` DESC limit 1';
+      $max_price = mysqli_query($cat_db, $push);
+      $res = mysqli_fetch_array($max_price);
+    ?>
       <label for="up-to">
-        <input type="text" id="up-to" placeholder="600">
+        <input type="text" id="up" placeholder="<?php echo $res['price_room']; ?>" value="<?php echo $_POST['up']; ?>">
         До
       </label>
+      
       <span class="filter__hint">Значение "от" не должно превышать значение "до"</span>
     </fieldset>
     <fieldset>
@@ -145,12 +169,10 @@
         Домик
       </label>
     </fieldset>
-    <button type="button">
-      <span>Применить</span>
-      <span>Подобрать</span>
-    </button>
+    <button type="submit">Применить</button>
     <button type="reset">Сбросить фильтр</button>
   </form>
+
   <button class="filter__btn-close" type="button"></button>
 <!-- </div> -->
 
@@ -172,16 +194,16 @@
                   <div class="offer__image-content">
                     <!-- 1х: 270px; 2x: 540px -->
                     <picture>
-                      <source type="image/webp" srcset="<?php echo $row['img2_room']?>">
-                      <img src="<?php echo row['img_room']?>"  alt="Номер категории эконом">
+                      <source type="image/webp" srcset="<?php echo $row['img2_room'];?>">
+                      <img src="<?php echo row['img_room'];?>"  alt="Номер категории эконом">
                     </picture>
                   </div>
                 </div>
               </div>
-              <h3><?php echo $row['class_room']?></h3>
+              <h3><?php echo $row['class_room'];?></h3>
               <ul class="offer__description">
-                <li class="offer__description-item">Размеры (ШхГхВ) - <?php echo $row['size_room']?>&nbsp;см</li>
-                <li class="offer__description-item">Площадь - <?php echo $row['square_room']?> м2</li>
+                <li class="offer__description-item">Размеры (ШхГхВ) - <?php echo $row['size_room'];?>&nbsp;см</li>
+                <li class="offer__description-item">Площадь - <?php echo $row['square_room'];?> м2</li>
                 <li class="offer__description-item offer__description-item--flex">
                   Оснащение номера
                   <span class="offer__icon">
