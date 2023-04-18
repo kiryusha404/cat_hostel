@@ -1,4 +1,7 @@
-
+<?php
+  $push = 'SELECT * FROM `cat_room` ORDER BY `cat_room`.`square_room` ASC';
+  $input = mysqli_query($cat_db, $push);
+?>
 
 
 
@@ -158,6 +161,10 @@
       <section class="catalog__result">
         <h2 class="visually-hidden">Результаты поиска</h2>
         <ul class="catalog__list">
+        <?php 
+                if (isset($input)){
+                while($row = mysqli_fetch_array($input)){
+                ?>
           <li class="catalog__item">
             <div class="offer">
               <div class="offer__image">
@@ -165,16 +172,16 @@
                   <div class="offer__image-content">
                     <!-- 1х: 270px; 2x: 540px -->
                     <picture>
-                      <source type="image/webp" srcset="img/room-economy@1x.webp 1x, img/room-economy@2x.webp 2x">
-                      <img src="img/room-economy@1x.jpg" srcset="img/room-economy@2x.jpg 2x" alt="Номер категории эконом">
+                      <source type="image/webp" srcset="<?php echo $row['img2_room']?>">
+                      <img src="<?php echo row['img_room']?>"  alt="Номер категории эконом">
                     </picture>
                   </div>
                 </div>
               </div>
-              <h3>Эконом</h3>
+              <h3><?php echo $row['class_room']?></h3>
               <ul class="offer__description">
-                <li class="offer__description-item">Размеры (ШхГхВ) - 90х70х180&nbsp;см</li>
-                <li class="offer__description-item">Площадь - 0,63 м2</li>
+                <li class="offer__description-item">Размеры (ШхГхВ) - <?php echo $row['size_room']?>&nbsp;см</li>
+                <li class="offer__description-item">Площадь - <?php echo $row['square_room']?> м2</li>
                 <li class="offer__description-item offer__description-item--flex">
                   Оснащение номера
                   <span class="offer__icon">
@@ -185,7 +192,7 @@
                   <span class="offer__hint">Пустой&nbsp;номер</span>
                 </li>
                 <li class="offer__description-item">
-                  Цена за сутки: <b>100&#8381;</b>
+                  Цена за сутки: <b><?php echo $row['price_room']?>&#8381;</b>
                 </li>
               </ul>
               <a class="button offer__button" href="#">
@@ -198,273 +205,10 @@
               </a>
             </div>
           </li>
-          <li class="catalog__item">
-            <div class="offer">
-              <div class="offer__image">
-                <div>
-                  <div class="offer__image-content">
-                    <!-- 1х: 270px; 2x: 540px -->
-                    <picture>
-                      <source type="image/webp" srcset="img/room-economy-plus@1x.webp 1x, img/room-economy-plus@2x.webp 2x">
-                      <img src="img/room-economy-plus@1x.jpg" srcset="img/room-economy-plus@2x.jpg 2x" alt="Номер категории эконом-плюс">
-                    </picture>
-                  </div>
-                </div>
-              </div>
-              <h3>Эконом плюс</h3>
-              <ul class="offer__description">
-                <li class="offer__description-item">Размеры (ШхГхВ) - 90х100х180&nbsp;см</li>
-                <li class="offer__description-item">Площадь - 0,90 м2</li>
-                <li class="offer__description-item offer__description-item--flex">
-                  Оснащение номера
-                  <span class="offer__icon">
-                    <svg width="16" height="12">
-                      <use xlink:href="#icon-bed"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Лежак</span>
-                  <span class="offer__icon">
-                      <svg width="14" height="16">
-                      <use xlink:href="#icon-claw"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Когтеточка</span>
-                </li>
-                <li class="offer__description-item">
-                  Цена за сутки: <b>200&#8381;</b>
-                </li>
-              </ul>
-              <a class="button offer__button" href="#">
-                <span>Забронировать</span>
-                <span class="button__paw">
-                  <svg width="21" height="18">
-                    <use xlink:href="#icon-paw"></use>
-                  </svg>
-                </span>
-              </a>
-            </div>
-          </li>
-          <li class="catalog__item">
-            <div class="offer">
-              <div class="offer__image">
-                <div>
-                  <div class="offer__image-content">
-                    <!-- 1х: 270px; 2x: 540px -->
-                    <picture>
-                      <source type="image/webp" srcset="img/room-comfort@1x.webp 1x, img/room-comfort@2x.webp 2x">
-                      <img src="img/room-comfort@1x.jpg" srcset="img/room-comfort@2x.jpg 2x" alt="Номер категории комфорт">
-                    </picture>
-                  </div>
-                </div>
-              </div>
-              <h3>Комфорт</h3>
-              <ul class="offer__description">
-                <li class="offer__description-item">Размеры (ШхГхВ) - 100х125х180&nbsp;см</li>
-                <li class="offer__description-item">Площадь - 1,13 м2</li>
-                <li class="offer__description-item offer__description-item--flex">
-                  Оснащение номера
-                  <span class="offer__icon">
-                    <svg width="16" height="12">
-                      <use xlink:href="#icon-bed"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Лежак</span>
-                  <span class="offer__icon">
-                      <svg width="14" height="16">
-                      <use xlink:href="#icon-claw"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Когтеточка</span>
-                  <span class="offer__icon">
-                    <svg width="16" height="16">
-                      <use xlink:href="#icon-toy"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint offer__hint--right">Игровой комплекс</span>
-                </li>
-                <li class="offer__description-item">
-                  Цена за сутки: <b>250&#8381;</b>
-                </li>
-              </ul>
-              <a class="button offer__button" href="#">
-                <span>Забронировать</span>
-                <span class="button__paw">
-                  <svg width="21" height="18">
-                    <use xlink:href="#icon-paw"></use>
-                  </svg>
-                </span>
-              </a>
-            </div>
-          </li>
-          <li class="catalog__item">
-            <div class="offer">
-              <div class="offer__image">
-                <div>
-                  <div class="offer__image-content">
-                    <!-- 1х: 270px; 2x: 540px -->
-                    <picture>
-                      <source type="image/webp" srcset="img/room-suite@1x.webp 1x, img/room-suite@2x.webp 2x">
-                      <img src="img/room-suite@1x.jpg" srcset="img/room-suite@2x.jpg 2x" alt="Номер категории сьют">
-                    </picture>
-                  </div>
-                </div>
-              </div>
-              <h3>Сьют</h3>
-              <ul class="offer__description">
-                <li class="offer__description-item">Размеры (ШхГхВ) - 125х125х180&nbsp;см</li>
-                <li class="offer__description-item">Площадь - 1,56 м2</li>
-                <li class="offer__description-item offer__description-item--flex">
-                  Оснащение номера
-                  <span class="offer__icon">
-                    <svg width="16" height="12">
-                      <use xlink:href="#icon-bed"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Лежак</span>
-                  <span class="offer__icon">
-                      <svg width="14" height="16">
-                      <use xlink:href="#icon-claw"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Когтеточка</span>
-                  <span class="offer__icon">
-                    <svg width="16" height="16">
-                      <use xlink:href="#icon-toy"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint offer__hint--right">Игровой комплекс</span>
-                </li>
-                <li class="offer__description-item">
-                  Цена за сутки: <b>350&#8381;</b>
-                </li>
-              </ul>
-              <a class="button offer__button" href="#">
-                <span>Забронировать</span>
-                <span class="button__paw">
-                  <svg width="21" height="18">
-                    <use xlink:href="#icon-paw"></use>
-                  </svg>
-                </span>
-              </a>
-            </div>
-          </li>
-          <li class="catalog__item">
-            <div class="offer">
-              <div class="offer__image">
-                <div>
-                  <div class="offer__image-content">
-                    <!-- 1х: 270px; 2x: 540px -->
-                    <picture>
-                      <source type="image/webp" srcset="img/room-lux@1x.webp 1x, img/room-lux@2x.webp 2x">
-                      <img src="img/room-lux@1x.jpg" srcset="img/room-lux@2x.jpg 2x" alt="Номер категории люкс">
-                    </picture>
-                  </div>
-                </div>
-              </div>
-              <h3>Люкс</h3>
-              <ul class="offer__description">
-                <li class="offer__description-item">Размеры (ШхГхВ) - 160х160х180&nbsp;см</li>
-                <li class="offer__description-item">Площадь - 2,56 м2</li>
-                <li class="offer__description-item offer__description-item--flex">
-                  Оснащение номера
-                  <span class="offer__icon">
-                    <svg width="16" height="12">
-                      <use xlink:href="#icon-bed"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Лежак</span>
-                  <span class="offer__icon">
-                      <svg width="14" height="16">
-                      <use xlink:href="#icon-claw"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Когтеточка</span>
-                  <span class="offer__icon">
-                    <svg width="16" height="16">
-                      <use xlink:href="#icon-toy"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint offer__hint--right">Игровой комплекс</span>
-                  <span class="offer__icon">
-                    <svg width="16" height="16">
-                      <use xlink:href="#icon-house"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint offer__hint--right offer__hint--narrow">Домик</span>
-                </li>
-                <li class="offer__description-item">
-                  Цена за сутки: <b>500&#8381;</b>
-                </li>
-              </ul>
-              <a class="button offer__button" href="#">
-                <span>Забронировать</span>
-                <span class="button__paw">
-                  <svg width="21" height="18">
-                    <use xlink:href="#icon-paw"></use>
-                  </svg>
-                </span>
-              </a>
-            </div>
-          </li>
-          <li class="catalog__item">
-            <div class="offer">
-              <div class="offer__image">
-                <div>
-                  <div class="offer__image-content">
-                    <!-- 1х: 270px; 2x: 540px -->
-                    <picture>
-                      <source type="image/webp" srcset="img/room-lux-super@1x.webp 1x, img/room-lux-super@2x.webp 2x">
-                      <img src="img/room-lux-super@1x.jpg" srcset="img/room-lux-super@2x.jpg 2x" alt="Номер категории супер-люкс">
-                    </picture>
-                  </div>
-                </div>
-              </div>
-              <h3>Супер-Люкс</h3>
-              <ul class="offer__description">
-                <li class="offer__description-item">Размеры (ШхГхВ) - 180х160х180&nbsp;см</li>
-                <li class="offer__description-item">Площадь - 2,88 м2</li>
-                <li class="offer__description-item offer__description-item--flex">
-                  Оснащение номера
-                  <span class="offer__icon">
-                    <svg width="16" height="12">
-                      <use xlink:href="#icon-bed"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Лежак</span>
-                  <span class="offer__icon">
-                      <svg width="14" height="16">
-                      <use xlink:href="#icon-claw"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint">Когтеточка</span>
-                  <span class="offer__icon">
-                    <svg width="16" height="16">
-                      <use xlink:href="#icon-toy"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint offer__hint--right">Игровой комплекс</span>
-                  <span class="offer__icon">
-                    <svg width="16" height="16">
-                      <use xlink:href="#icon-house"></use>
-                    </svg>
-                  </span>
-                  <span class="offer__hint offer__hint--right offer__hint--narrow">Домик</span>
-                </li>
-                <li class="offer__description-item">
-                  Цена за сутки: <b>600&#8381;</b>
-                </li>
-              </ul>
-              <a class="button offer__button" href="#">
-                <span>Забронировать</span>
-                <span class="button__paw">
-                  <svg width="21" height="18">
-                    <use xlink:href="#icon-paw"></use>
-                  </svg>
-                </span>
-              </a>
-            </div>
-          </li>
-        </ul>
+          <?php 
+                    }
+                }
+                ?>
       </section>
     </div>
     <section class="catalog__banner banner">
