@@ -65,25 +65,34 @@
           <h2>Номера</h2>
           <div class="rooms__slider-container swiper-container">
             <ul class="rooms__list swiper-wrapper">
+
+              <?php
+  $push = 'SELECT * FROM `cat_room` ORDER BY `cat_room`.`id_room` DESC limit 3';
+  $input = mysqli_query($cat_db, $push);
+  if (isset($input)){
+    while($row = mysqli_fetch_array($input)){
+
+  
+?>
               <li class="rooms__item swiper-slide">
                 <div class="rooms__img-container">
                   <picture>
-                    <source type="image/webp" srcset="img/slider1@1x.webp 1x, img/slider1@2x.webp 2x">
-                    <source type="image/jpeg" srcset="img/slider1@1x.jpg 1x, img/slider1@2x.jpg 2x">
-                    <img src="img/slider1@1x.jpg" width="600" height="404" alt="Эконом плюс">
+                    <source type="image/webp" srcset="<?php echo $row['img2_room'];?>">
+                    <source type="image/jpeg" srcset="<?php echo $row['img_room'];?>">
+                    <img src="<?php echo $row['img_room'];?>" width="600" height="404" alt="Комфорт">
                   </picture>
                 </div>
                 <div class="rooms__info">
-                  <h3>Эконом плюс</h3>
+                  <h3><?php echo $row['class_room'];?></h3>
                   <ul class="rooms__info-list">
                     <li class="rooms__info-item">
-                      <p>Площадь - 0,90 м2</p>
+                      <p>Площадь - <?php echo $row['square_room'];?></p>
                     </li>
                     <li class="rooms__info-item">
-                      <p>Размеры (ШхГхВ) <span class="rooms__no-m">-</span> 90х100х180 см</p>
+                      <p>Размеры (ШхГхВ) <span class="rooms__no-m">-</span> <?php echo $row['size_room'];?> см</p>
                     </li>
                     <li class="rooms__info-item">
-                      <p>Цена за сутки: 200₽</p>
+                      <p>Цена за сутки: <?php echo $row['price_room']?>₽</p>
                     </li>
                   </ul>
                   <button class="button book-button" type="button">
@@ -95,66 +104,11 @@
                   </button>
                 </div>
               </li>
-              <li class="rooms__item swiper-slide">
-                <div class="rooms__img-container">
-                  <picture>
-                    <source type="image/webp" srcset="img/slider2@1x.webp 1x, img/slider2@2x.webp 2x">
-                    <source type="image/jpeg" srcset="img/slider2@1x.jpg 1x, img/slider2@2x.jpg 2x">
-                    <img src="img/slider2@1x.jpg" width="600" height="404" alt="Комфорт">
-                  </picture>
-                </div>
-                <div class="rooms__info">
-                  <h3>Комфорт</h3>
-                  <ul class="rooms__info-list">
-                    <li class="rooms__info-item">
-                      <p>Площадь - 1,13 м2</p>
-                    </li>
-                    <li class="rooms__info-item">
-                      <p>Размеры (ШхГхВ) <span class="rooms__no-m">-</span> 100х125х180 см</p>
-                    </li>
-                    <li class="rooms__info-item">
-                      <p>Цена за сутки: 250₽</p>
-                    </li>
-                  </ul>
-                  <button class="button book-button" type="button">
-                    <span>Забронировать</span>
-                    <span class="button__paw">
-                      <svg width="21" height="18"><use xlink:href="#icon-paw"></use>
-                      </svg>
-                    </span>
-                  </button>
-                </div>
-              </li>
-              <li class="rooms__item swiper-slide">
-                <div class="rooms__img-container">
-                  <picture>
-                    <source type="image/webp" srcset="img/slider3@1x.webp 1x, img/slider3@2x.webp 2x">
-                    <source type="image/jpeg" srcset="img/slider3@1x.jpg 1x, img/slider3@2x.jpg 2x">
-                    <img src="img/slider3@1x.jpg" width="600" height="404" alt="Сьют">
-                  </picture>
-                </div>
-                <div class="rooms__info">
-                  <h3>Сьют</h3>
-                  <ul class="rooms__info-list">
-                    <li class="rooms__info-item">
-                      <p>Площадь - 1,56 м2</p>
-                    </li>
-                    <li class="rooms__info-item">
-                      <p>Размеры (ШхГхВ) <span class="rooms__no-m">-</span> 125х125х180 см</p>
-                    </li>
-                    <li class="rooms__info-item">
-                      <p>Цена за сутки: 350₽</p>
-                    </li>
-                  </ul>
-                  <button class="button book-button" type="button">
-                    <span>Забронировать</span>
-                    <span class="button__paw">
-                      <svg width="21" height="18"><use xlink:href="#icon-paw"></use>
-                      </svg>
-                    </span>
-                  </button>
-                </div>
-              </li>
+              <?php
+  }
+  }
+              ?>
+              
             </ul>
 
           </div>

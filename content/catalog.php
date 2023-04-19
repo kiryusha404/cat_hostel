@@ -80,6 +80,7 @@
       $push = 'SELECT price_room FROM `cat_room` ORDER BY `cat_room`.`price_room` ASC limit 1';
       $min_price = mysqli_query($cat_db, $push);
       $res = mysqli_fetch_array($min_price);
+      
     ?>
       <h3>Цена за сутки,<span>&#8381;</span></h3>
       <label for="from">
@@ -100,41 +101,26 @@
     </fieldset>
     <fieldset>
       <h3>Площадь</h3>
-      <label for="square1">
-        <input type="checkbox" name="0,63 м2" id="square1">
+      <?php 
+      $square = 'SELECT square_room FROM `cat_room`  
+      GROUP BY square_room  
+      ORDER BY `cat_room`.`square_room` ASC';
+      $sqr_r = mysqli_query($cat_db, $square);
+      $inc = 0;
+      if (isset($input)){
+        while($cat_sqr = mysqli_fetch_array($sqr_r)){
+          $sqr = $cat_sqr['square_room'];
+          $inc = $inc + 1;
+        ?>
+      <label for="square<?php echo $inc; ?>">
+        <input type="checkbox" name="<?php echo $sqr; ?>" id="square<?php echo $inc; ?>">
         <span></span>
-        0,63 м2
+        <?php echo $sqr; ?>
       </label>
+<?php
+        }}
+?>
 
-      <label for="square2">
-        <input type="checkbox" name="0,90 м2" id="square2">
-        <span></span>
-        0,90 м2
-      </label>
-
-      <label for="square3">
-        <input type="checkbox" name="1,13 м2" id="square3">
-        <span></span>
-        1,13 м2
-      </label>
-
-      <label for="square4">
-        <input type="checkbox" name="1,56 м2" id="square4">
-        <span></span>
-        1,56 м2
-      </label>
-
-      <label for="square5">
-        <input type="checkbox" name="2,56 м2" id="square5">
-        <span></span>
-        2,56 м2
-      </label>
-
-      <label for="square6">
-        <input type="checkbox" name="2,88 м2" id="square6">
-        <span></span>
-        2,88 м2
-      </label>
     </fieldset>
     <fieldset>
       <h3>Оснащение номера</h3>
