@@ -19,7 +19,7 @@
 
 
   <main class="catalog container">
-    <div class="catalog__wrapper">
+    <div class="catalog__wrapper" id="catalog__wrapper">
       <h1>Наши номера</h1>
       <div class="catalog__sorting sorting">
         <button class="sorting__toggle" type="button" aria-label="Показать варианты сортировки">
@@ -62,7 +62,7 @@
           </li>
         </ul>
       </div>
-
+      
       <section class="catalog__filters filter">
         <h2 class="visually-hidden">Фильтры</h2>
         <button class="filter__toggle" type="button">
@@ -248,7 +248,7 @@
     <section class="catalog__banner banner">
       <h2>Каждый 7-й день<br><b>бесплатно!</b></h2>
       <p>Акция действует при размещении в&nbsp;номерах &ldquo;Люкс&rdquo; и&nbsp;&ldquo;Супер-Люкс&rdquo;</p>
-      <a class="button button--white banner__button" href="#">
+      <a class="button button--white banner__button" href="catalog.php#catalog__wrapper">
         <span>Забронировать</span>
         <span class="button__paw">
           <svg width="21" height="18">
