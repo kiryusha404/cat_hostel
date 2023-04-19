@@ -192,24 +192,50 @@
                 <li class="offer__description-item">Площадь - <?php echo $row['square_room'];?> м2</li>
                 <li class="offer__description-item offer__description-item--flex">
                   Оснащение номера
+                  <?php
+                    $add = 'SELECT name_addition.name_addition, name_addition.img_addition FROM room_addition JOIN name_addition ON room_addition.name_addition=name_addition.id_addition WHERE room_addition.room_addition = '.$row['id_room'].'';
+                    $addition = mysqli_query($cat_db, $add);
+                    $flag;
+                    if ($addition){
+                      while($add_room = mysqli_fetch_array($addition)){
+                  ?>
+                  <span class="offer__icon">
+                    <svg width="16" height="16">
+                      <use xlink:href="<?php echo $add_room['img_addition']; ?>"></use>
+                    </svg>
+                  </span>
+                  <span class="offer__hint"><?php echo $add_room['name_addition']; ?></span>
+                  <?php
+                  $flag = $add_room['name_addition'];
+                      }}
+                      if(!$flag){
+                  ?>
                   <span class="offer__icon">
                     <svg width="16" height="16">
                       <use xlink:href="#icon-none"></use>
                     </svg>
                   </span>
-                  <span class="offer__hint">Пустой&nbsp;номер</span>
+                  <span class="offer__hint">Пустой номер</span>
+                  <?php
+                      }
+                  ?>
                 </li>
-                <li class="offer__description-item">
+
+
+                <span class="button__paw">
+                  <svg width="21" height="18">
+                    <use xlink:href="#icon-paw"></use>
+                  </svg>
+
+                </span>
+                                <li class="offer__description-item">
                   Цена за сутки: <b><?php echo $row['price_room']?>&#8381;</b>
                 </li>
               </ul>
               <a class="button offer__button" href="#">
                 <span>Забронировать</span>
-                <span class="button__paw">
-                  <svg width="21" height="18">
-                    <use xlink:href="#icon-paw"></use>
-                  </svg>
-                </span>
+
+
               </a>
             </div>
           </li>
