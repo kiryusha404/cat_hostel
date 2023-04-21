@@ -231,11 +231,4 @@
         </button>
       </div>
     </div>
-  <!-- Скрипт подключения яндекс-карты-->
-  <script src="https://api-maps.yandex.ru/2.1/?apikey=6b2b42a0-28a0-4e74-9f1b-7b685c9fd6cb&lang=ru_RU" type="text/javascript"></script>
 
-  <script src="js/vendor.min.js"></script>
-
-  <script src="js/script.min.js"></script>
-</body>
-</html>

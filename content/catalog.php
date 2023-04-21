@@ -177,13 +177,14 @@
             <div class="offer">
               <div class="offer__image">
                 <div>
-                  <div class="offer__image-content">
+                <a href="room_page.php?id=<?php echo $row['id_room'];?>"><div class="offer__image-content">
                     <!-- 1х: 270px; 2x: 540px -->
                     <picture>
                       <source type="image/webp" srcset="<?php echo $row['img2_room'];?>">
                       <img src="<?php echo row['img_room'];?>"  alt="Номер категории эконом">
                     </picture>
                   </div>
+                  </a>
                 </div>
               </div>
               <h3><?php echo $row['class_room'];?></h3>
@@ -238,7 +239,9 @@
 
               </a>
             </div>
+            
           </li>
+          
           <?php 
                     }
                 }
@@ -264,10 +267,4 @@
 
 
 
-  <!-- Скрипт подключения яндекс-карты-->
-  <script src="https://api-maps.yandex.ru/2.1/?apikey=6b2b42a0-28a0-4e74-9f1b-7b685c9fd6cb&lang=ru_RU"></script>
 
-  <script src="js/vendor.min.js"></script>
-  <script src="js/script.min.js"></script>
-</body>
-</html>
