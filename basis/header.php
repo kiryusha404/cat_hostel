@@ -29,14 +29,23 @@
                 <a class="nav__link" href="authorization.php">Войти</a>
               </li>';
       }else{
-        $push = 'SELECT name FROM users WHERE id_user="'.$_SESSION['id'].'"';
+        echo '<li class="nav__item">
+        <a class="nav__link" href="purchase.php">Мои покупки</a>
+        </li>';
+        $push = 'SELECT name, status_user FROM users WHERE id_user="'.$_SESSION['id'].'"';
         $input = mysqli_query($cat_db, $push);
         $row = mysqli_fetch_array($input);
+        if($row['status_user']){
+          echo '<li class="nav__item">
+          <a class="nav__link" href="admin.php">Админ панель</a>
+        </li>';
+        }
         echo '<li class="nav__item">
                 <a class="nav__link" href="unsession.php">'.$row["name"].'</a>
               </li>';
 
       }
+      
         ?>
       </ul>
     </nav>

@@ -21,6 +21,7 @@ $cat_db = mysqli_connect("localhost", "root", "root", "cathotel");
   <link rel="preload" href="fonts/Rubikmedium.woff2" as="font" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/css.css">
 </head>
 
 <body>

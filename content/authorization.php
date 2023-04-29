@@ -19,11 +19,12 @@
 </div>
 <?php 
         if(!empty($_POST['login']) && !empty($_POST['pass'])){
-            $push = 'SELECT id_user, pass_user FROM users WHERE nphone_user="'.$_POST["login"].'"';
+            $push = 'SELECT id_user, pass_user, status_user FROM users WHERE nphone_user="'.$_POST["login"].'"';
             $input = mysqli_query($cat_db, $push);
             $row = mysqli_fetch_array($input);
                 if(password_verify($_POST['pass'], $row['pass_user'])){
                    $_SESSION['id'] = $row['id_user']; 
+                   $_SESSION['status'] = $row['status_user']; 
                    echo "<script>window.location.href='index.php'</script>";
 
 

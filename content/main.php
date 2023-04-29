@@ -136,27 +136,21 @@
           <h2>Отзывы</h2>
           <div class="reviews__list-container swiper-container">
               <ul class="reviews__list swiper-wrapper">
+                <?php
+                    $feedback = 'SELECT feedback.text_feedback as text, feedback.date as date , booking_room.name_user as name FROM `feedback` JOIN booking_room on feedback.id_booking = booking_room.id_booking ORDER BY feedback.id_feedback ASC LIMIT 5';
+                    $feed = mysqli_query($cat_db, $feedback);
+                      while($feet = mysqli_fetch_array($feed)){
+                ?>
                 <li class="reviews__item swiper-slide">
-                  <p>Первый раз пришлось оставить нашего котика в гостинице, очень переживали. Администратор Мария каждый день высылала нам фото нашего питомца, рассказывала, как он себя чувствует. И мы и котик остались очень довольны!</p>
+                  <p><?php echo $feet['text']; ?></p>
                   <div class="reviews__container">
-                    <p>Валерия Гришаева</p>
-                    <p>15 ноября, 2019</p>
+                    <p><?php echo $feet['name']; ?></p>
+                    <p><?php echo $feet['date']; ?></p>
                   </div>
                 </li>
-                <li class="reviews__item swiper-slide">
-                  <p>Гостиницу для питомцев нам посоветовали друзья. Они всегда оставляют здесь своего кота, когда уезжают. В “Котейке” очень хорошо заботятся о питомцах, в гостинице очень чисто. Всем рекомендую! Будем обращаться еще.</p>
-                  <div class="reviews__container">
-                    <p>Екатерина Минаева</p>
-                    <p>10 октября, 2019</p>
-                  </div>
-                </li>
-                <li class="reviews__item swiper-slide">
-                  <p>Мой кот — настоящая привереда, угодить ему сложно. У меня были особые требования к уходу за ним, и “Котейка” отлично справились. Я часто наблюдал по видео за питомцем со своего телефона, это очень удобно.</p>
-                  <div class="reviews__container">
-                    <p>Павел Нечаев</p>
-                    <p>2 августа, 2019</p>
-                  </div>
-                </li>
+                <?php
+                      }
+                ?>
               </ul>
           </div>
           <div class="slider-controls">
@@ -182,53 +176,5 @@
 
     
 
-    <div class="overlay">
-      <div class="modal modal--book modal--hide">
-        <h2>Забронировать номер</h2>
-          <form action="#" method="POST" autocomplete="on" id="book">
-            <label for="name">Ваше имя</label>
-            <input type="text" name="name" id="name" placeholder="Ваше имя" required="">
 
-            <label for="pet-name">Имя Питомца</label>
-            <input type="text" name="pet-name" id="pet-name" placeholder="Имя Питомца" required="">
-
-            <label for="tel">Телефон</label>
-            <input type="tel" name="tel" id="tel" placeholder="Телефон" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" required="">
-
-            <label for="email">E-mail</label>
-            <input type="email" name="email" id="email" placeholder="E-mail" required="">
-            <div>
-              <span>Дата заезда</span>
-              <label>
-                <span>с</span>
-                <input type="text" name="arrival" id="arrival" placeholder="26.01.2020" pattern="[0-9]{1,2}[\.][0-9]{1,2}[\.][0-9]{4}" required="">
-              </label>
-              <label>
-                <span>по</span>
-                <input type="text" name="departure" id="departure" placeholder="26.02.2020" pattern="[0-9]{1,2}[\.][0-9]{1,2}[\.][0-9]{4}" required="">
-              </label>
-            </div>
-            <button id="book-submit" type="submit">
-              <span>Отправить заявку</span>
-              <span>
-                <svg width="21" height="18"><use xlink:href="#icon-paw"></use>
-                </svg>
-              </span>
-            </button>
-          </form>
-        <button id="form-close-x" class="modal__close" type="button"></button>
-      </div>
-      <div class="modal modal--accept modal--hide">
-        <p>Спасибо за заявку!</p>
-        <p>Мы свяжемся с вами в ближайшее время</p>
-        <button id="accept-close-x" class="modal__close" type="button"></button>
-        <button id="accept-close" class="button button--sm" type="button">
-          <span>Ок</span>
-          <span class="button__paw">
-            <svg width="21" height="18"><use xlink:href="#icon-paw"></use>
-            </svg>
-          </span>
-        </button>
-      </div>
-    </div>
 
