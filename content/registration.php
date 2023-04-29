@@ -4,7 +4,7 @@
         echo "<script>window.location.href='index.php'</script>";
     }
 ?>
-<div class="nav_form">
+<div class="modal modal--book parent">
     <h1>Регистрация</h1>
     <form action="#" method="post" class="input">
         <input type="text" tabindex="1" required name="name" class="info_input" placeholder="Имя" value="<?php echo $_POST['name2'] ?>"> 
@@ -17,10 +17,6 @@
         <div class="password">
 	        <input type="password" tabindex="5" id="password-input2" required placeholder="Повтор пароль" name="pass2" class="info_input" value="<?php echo $_POST['pass2'] ?>">
 	        <a href="#" class="password-control" onclick="return show_hide_password(this, 'password-input2');"></a>
-        </div>
-        <div class="confirmation info_input">
-            <input type="checkbox" required name="check" class="check" tabindex="6">
-            <p>Я соглашаюсь с <a href="https://yandex.ru/legal/rules/" id="user_agreement">пользовательскими условиями</a></p>
         </div>
         <?php 
             if(!empty($_POST['name']) && !empty($_POST['login']) && !empty($_POST['email']) && !empty($_POST['pass'])){
@@ -52,4 +48,3 @@
     </form>
     <p>У вас уже есть аккаунт? <a href="authorization.php">Войти</a></p>
 </div>
-<script src="js/pass.js"></script>

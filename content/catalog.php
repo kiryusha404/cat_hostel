@@ -2,14 +2,18 @@
   if(empty($_POST['from']) && empty($_POST['up'])){
   $push = 'SELECT * FROM `cat_room` ORDER BY `cat_room`.`square_room` ASC';
   $input = mysqli_query($cat_db, $push);
-  echo $_POST['from'];
-  echo $_POST['up'];
   }else{
     if(!$_POST['from']){
-      $_POST['from'] = 0;
+      $push = 'SELECT price_room FROM `cat_room` ORDER BY `cat_room`.`price_room` ASC limit 1';
+      $min_price = mysqli_query($cat_db, $push);
+      $res = mysqli_fetch_array($min_price);
+      $_POST['from'] = $res['price_room'];
     }
     if(!$_POST['up']){
-      $_POST['up'] = 999999;
+      $push = 'SELECT price_room FROM `cat_room` ORDER BY `cat_room`.`price_room` DESC limit 1';
+      $max_price = mysqli_query($cat_db, $push);
+      $res = mysqli_fetch_array($max_price);
+      $_POST['up'] = $res['price_room'];
     }
     $push = 'SELECT * FROM `cat_room`  WHERE price_room >= "'.$_POST['from'].'" AND price_room <= "'.$_POST['up'].'" ORDER BY `cat_room`.`square_room` ASC';
     $input = mysqli_query($cat_db, $push);
@@ -74,7 +78,7 @@
         <div class="filter__overlay">
           <div class="filter__inner">
             <!-- <div class="filter"> -->
-  <form action="#" method="POST" >
+  <form action="#" method="POST" > <!--                                          -------------------------->
     <fieldset>
     <?php
       $push = 'SELECT price_room FROM `cat_room` ORDER BY `cat_room`.`price_room` ASC limit 1';
@@ -84,7 +88,7 @@
     ?>
       <h3>Цена за сутки,<span>&#8381;</span></h3>
       <label for="from">
-        <input type="text" id="from" placeholder="<?php echo $res['price_room']; ?>" value="<?php echo $_POST['from']; ?>">
+        <input type="text" name="from" id="from" placeholder="<?php echo $res['price_room']; ?>" value="<?php echo $_POST['from']; ?>">
         От
       </label>
       <?php
@@ -93,7 +97,7 @@
       $res = mysqli_fetch_array($max_price);
     ?>
       <label for="up-to">
-        <input type="text" id="up" placeholder="<?php echo $res['price_room']; ?>" value="<?php echo $_POST['up']; ?>">
+        <input type="text" name="up" id="up" placeholder="<?php echo $res['price_room']; ?>" value="<?php echo $_POST['up']; ?>">
         До
       </label>
       
@@ -233,11 +237,6 @@
                   Цена за сутки: <b><?php echo $row['price_room']?>&#8381;</b>
                 </li>
               </ul>
-              <a class="button offer__button" href="#">
-                <span>Забронировать</span>
-
-
-              </a>
             </div>
             
           </li>

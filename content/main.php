@@ -75,12 +75,12 @@
   
 ?>
               <li class="rooms__item swiper-slide">
-                <div class="rooms__img-container">
-                  <picture>
+              <div class="rooms__img-container">
+              <a href="room_page.php?id=<?php echo $row['id_room'];?>"><picture>
                     <source type="image/webp" srcset="<?php echo $row['img2_room'];?>">
                     <source type="image/jpeg" srcset="<?php echo $row['img_room'];?>">
                     <img src="<?php echo $row['img_room'];?>" width="600" height="404" alt="Комфорт">
-                  </picture>
+                  </picture></a>
                 </div>
                 <div class="rooms__info">
                   <h3><?php echo $row['class_room'];?></h3>
@@ -95,8 +95,8 @@
                       <p>Цена за сутки: <?php echo $row['price_room']?>₽</p>
                     </li>
                   </ul>
-                  <button class="button book-button" type="button">
-                    <span>Забронировать</span>
+                  <button class="button "  onclick="window.location.href='room_page.php?id=<?php echo $row['id_room'];?>';">
+                    <span>Посмотреть</span>
                     <span class="button__paw">
                       <svg width="21" height="18"><use xlink:href="#icon-paw"></use>
                       </svg>

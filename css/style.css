@@ -3453,3 +3453,28 @@ button.modal__close {
   display: block; }
 
 
+  .error{
+    color: rgb(255, 0, 0);
+    text-align: left;
+    margin-bottom: 7px; 
+}
+.password {
+	position: relative;
+}
+.password-control {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(https://snipp.ru/demo/495/view.svg) 0 0 no-repeat;
+}
+.password-control.view {
+	background: url(https://snipp.ru/demo/495/no-view.svg) 0 0 no-repeat;
+}
+@media screen and (max-width: 650px){
+    .nav_form{
+        margin: 10px 10px 0 10px;
+    }
+}

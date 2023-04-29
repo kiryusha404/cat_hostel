@@ -106,11 +106,11 @@ while($row = mysqli_fetch_array($input)){
 ?>
 <li class="rooms__item swiper-slide">
   <div class="rooms__img-container">
-    <picture>
+  <a href="room_page.php?id=<?php echo $row['id_room'];?>"><picture>
       <source type="image/webp" srcset="<?php echo $row['img2_room'];?>">
       <source type="image/jpeg" srcset="<?php echo $row['img_room'];?>">
       <img src="<?php echo $row['img_room'];?>" width="600" height="404" alt="Комфорт">
-    </picture>
+    </picture></a>
   </div>
   <div class="rooms__info">
     <h3><?php echo $row['class_room'];?></h3>
@@ -125,8 +125,8 @@ while($row = mysqli_fetch_array($input)){
         <p>Цена за сутки: <?php echo $row['price_room']?>₽</p>
       </li>
     </ul>
-    <button class="button book-button" type="button">
-      <span>Забронировать</span>
+    <button class="button "  onclick="window.location.href='room_page.php?id=<?php echo $row['id_room'];?>';">
+      <span>Посмотреть</span>
       <span class="button__paw">
         <svg width="21" height="18"><use xlink:href="#icon-paw"></use>
         </svg>
@@ -162,124 +162,38 @@ while($row = mysqli_fetch_array($input)){
         </div>
       </section>
     </main>
-    <footer class="footer">
-  <section class="contacts" id="contacts">
-    <div class="contacts__info">
-      <div class="contacts__wrapper">
-        <h2>Как нас найти</h2>
-        <address class="contacts__list">
-          <div class="contacts__item">
-            <b>Адрес</b>
-            <span>Санкт-Петербург,<br> ул&nbsp;Большая Конюшенная, д&nbsp;19</span>
-          </div>
-          <div class="contacts__item">
-            <b>Режим работы</b>
-            <span>Ежедневно, с&nbsp;9:00 до&nbsp;20:00</span>
-          </div>
-          <div class="contacts__item">
-            <b>Телефон</b>
-            <a class="contacts__link" href="tel:88003335599">8&nbsp;(800)&nbsp;333-55-99</a>
-          </div>
-          <div class="contacts__item">
-            <b>E-mail</b>
-            <a class="contacts__link" href="mailto:info@cat-hotel.ru">info@cat-hotel.ru</a>
-          </div>
-          <div class="contacts__item">
-            <b>Социальные сети</b>
-            <ul class="social footer__social">
-              <li class="social__item">
-                <a class="social__link" href="#">
-                  <span class="visually-hidden">Котейка на Фейсбуке</span>
-                  <svg class="social__icon icon-svg" width="24" height="24">
-                    <use xlink:href="img/sprite_auto.svg#icon-fb"></use>
-                  </svg>
-                </a>
-              </li>
-              <li class="social__item">
-                <a class="social__link" href="#">
-                  <span class="visually-hidden">Котейка в Инстаграме</span>
-                  <svg class="social__icon icon-svg" width="24" height="24">
-                    <use xlink:href="img/sprite_auto.svg#icon-insta"></use>
-                  </svg>
-                </a>
-              </li>
-              <li class="social__item">
-                <a class="social__link" href="#">
-                  <span class="visually-hidden">Котейка в ВКонтакте</span>
-                  <svg class="social__icon icon-svg" width="24" height="24">
-                    <use xlink:href="img/sprite_auto.svg#icon-vk"></use>
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </address>
-      </div>
-    </div>
-    <div class="contacts__map map">
-      <div class="map__fallback">
-        <picture>
-          <source type="image/webp" srcset="img/map@1x.webp 1x, img/map@2x.webp 2x">
-          <img src="img/map@1x.jpg" srcset="img/map@2x.jpg 2x" alt="Часть карты с отелем для кошек Котейка по адресу г. Санкт-Петербург, ул. Б. Конюшенная, д. 19">
-        </picture>
-      </div>
-      <div class="map__image" id="map"></div>
-    </div>
-  </section>
-  <div class="footer__navigation footer__wrapper">
-    <a class="logo footer__logo" href="main.html">
-      <img src="img/logo.svg" width="63" height="52" alt="Логотип отеля для кошек Котейка">
-    </a>
-  <nav class="nav footer__nav">
-      <ul class="nav__list nav__list--col">
-        <li class="nav__item">
-          <a class="nav__link" href="main.html#about">Почему мы?</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" href="main.html#rooms">Номера</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" href="main.html#reviews">Отзывы</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" href="main.html#contacts">Как нас найти</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="footer__bottom">
-    <div class="footer__wrapper">
-      <a href="#">&copy; 2019 Все права защищены</a>
-      <a href="#">Политика конфиденциальности</a>
-    </div>
-  </div>
-</footer>
+   
 
 
     <div class="overlay">
       <div class="modal modal--book modal--hide">
         <h2>Забронировать номер</h2>
-          <form action="#" method="POST" autocomplete="on" id="book">
+       <?php 
+              $user = 'SELECT * FROM users WHERE id_user="'.$_SESSION['id'].'"';
+              $data_user = mysqli_query($cat_db, $user);
+              $res = mysqli_fetch_array($data_user);
+    ?>
+          <form action="#" method="POST"  id="book">
             <label for="name">Ваше имя</label>
-            <input type="text" name="name" id="name" placeholder="Ваше имя" required="">
+            <input type="text" name="name" id="nme" placeholder="Ваше имя"  required="" value="<?php echo $res['name']; ?>">
 
             <label for="pet-name">Имя Питомца</label>
-            <input type="text" name="pet-name" id="pet-name" placeholder="Имя Питомца" required="">
+            <input type="text" name="pet-name" id="pe-name" placeholder="Имя Питомца"  required="" value="">
 
             <label for="tel">Телефон</label>
-            <input type="tel" name="tel" id="tel" placeholder="Телефон" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" required="">
+            <input type="tel" name="tel" id="tl" placeholder="Телефон" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" required="" value="<?php echo $res['nphone_user']; ?>">
 
             <label for="email">E-mail</label>
-            <input type="email" name="email" id="email" placeholder="E-mail" required="">
+            <input type="email" name="email" id="emal" placeholder="E-mail" required="" value="<?php echo $res['email_user']; ?>">
             <div>
               <span>Дата заезда</span>
               <label>
                 <span>с</span>
-                <input type="text" name="arrival" id="arrival" placeholder="26.01.2020" pattern="[0-9]{1,2}[\.][0-9]{1,2}[\.][0-9]{4}" required="">
+                <input type="text" name="arrival" id="arival" placeholder="26.01.2020" pattern="[0-9]{1,2}[\.][0-9]{1,2}[\.][0-9]{4}" required="">
               </label>
               <label>
                 <span>по</span>
-                <input type="text" name="departure" id="departure" placeholder="26.02.2020" pattern="[0-9]{1,2}[\.][0-9]{1,2}[\.][0-9]{4}" required="">
+                <input type="text" name="departure" id="dparture" placeholder="26.02.2020" pattern="[0-9]{1,2}[\.][0-9]{1,2}[\.][0-9]{4}" required="">
               </label>
             </div>
             <button id="book-submit" type="submit">
@@ -292,7 +206,19 @@ while($row = mysqli_fetch_array($input)){
           </form>
         <button id="form-close-x" class="modal__close" type="button"></button>
       </div>
-      <div class="modal modal--accept modal--hide">
+      <?php 
+      if(!empty($_POST['name']) && !empty($_POST['pet-name']) && !empty($_POST['tel']) && !empty($_POST['email']) && !empty($_POST['arrival']) && !empty($_POST['departure'])){
+        if(!$_SESSION['id']){
+          echo "<script>window.location.href='authorization.php'</script>"; 
+        }
+        else{
+          $booking = 'INSERT INTO `booking_room` (`id_booking`, `id_room`, `id_user`, `name_user`, `name_pet`, `nphone`, `email`, `date1`, `date2`, `status`) VALUES (NULL, '.$room_id.', '.$_SESSION['id'].', "'.$_POST['name'].'", "'.$_POST['pet-name'].'", "'.$_POST['tel'].'", "'.$_POST['email'].'", "'.$_POST['arrival'].'", "'.$_POST['departure'].'", "expectation");';
+          $book_room = mysqli_query($cat_db, $booking);
+        }   
+      }
+?>
+
+<?php if($_SESSION['id']) { ?>  <div class="modal modal--accept modal--hide">
           <p>Спасибо за заявку!</p>
           <p>Мы свяжемся с вами в ближайшее время</p>
           <button id="accept-close" class="button button--sm" type="button">
@@ -304,6 +230,5 @@ while($row = mysqli_fetch_array($input)){
           </button>
           <button id="accept-close-x" class="modal__close" type="button"></button>
       </div>
-    </div>
-
-
+    </div>'
+    <?php } ?>
