@@ -35,7 +35,7 @@
         $push = 'SELECT name, status_user FROM users WHERE id_user="'.$_SESSION['id'].'"';
         $input = mysqli_query($cat_db, $push);
         $row = mysqli_fetch_array($input);
-        if($row['status_user']){
+        if($row['status_user'] == "admin"){
           echo '<li class="nav__item">
           <a class="nav__link" href="admin.php">Админ панель</a>
         </li>';

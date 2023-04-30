@@ -49,3 +49,4 @@
     </form>
     <p>У вас уже есть аккаунт? <a href="authorization.php">Войти</a></p>
 </div>
+<script src="js/pass.js"></script>

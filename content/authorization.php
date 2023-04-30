@@ -40,3 +40,4 @@
                 }
         }
         ?>
+        <script src="js/pass.js"></script>

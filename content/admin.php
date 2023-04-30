@@ -26,6 +26,12 @@ if($_SESSION['status'] != 'admin'){
           $push = 'SELECT booking_room.date1 as date1, booking_room.date2 as date2, booking_room.name_user as name_user, cat_room.class_room as id_room, booking_room.id_booking as id_booking FROM `booking_room` JOIN cat_room on booking_room.id_room = cat_room.id_room WHERE booking_room.status = "expectation" order by booking_room.id_booking asc';
           $input = mysqli_query($cat_db, $push);
           if (isset($input)){
+            $row = mysqli_fetch_array($input);
+            if(!$row){
+                echo "<p>Заказов на данный момент нет</p>";
+            }
+            $push = 'SELECT booking_room.date1 as date1, booking_room.date2 as date2, booking_room.name_user as name_user, cat_room.class_room as id_room, booking_room.id_booking as id_booking FROM `booking_room` JOIN cat_room on booking_room.id_room = cat_room.id_room WHERE booking_room.status = "expectation" order by booking_room.id_booking asc';
+            $input = mysqli_query($cat_db, $push);
             while($row = mysqli_fetch_array($input)){
             ?>
             <div class="booking">
