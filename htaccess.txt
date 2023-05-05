@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteRule ^id([0-9]+) room_page.php?id=$1
+RewriteEngine On
+RewriteRule ^id([0-9]+) booking/del.php?id=$1
+RewriteEngine On
+RewriteRule ^id([0-9]+) booking/add.php?id=$1
+
+RewriteEngine On
+RewriteRule ^id([0-9]+) feedback.php?id=$1
+
+RewriteEngine On
+RewriteRule ^id([0-9]+) content/delfeedback.php?id=$1
